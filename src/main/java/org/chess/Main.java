@@ -10,6 +10,5 @@ public class Main {
 
         UI.printBoard(chessMatch.getPieces());
 
-        Board board = new Board(8, 8);
     }
 }

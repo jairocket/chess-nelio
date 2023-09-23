@@ -1,12 +1,17 @@
 package org.chess.chess;
 
 import org.chess.boardgame.Board;
+import org.chess.boardgame.Position;
+import org.chess.chess.enums.Color;
+import org.chess.chess.pieces.King;
+import org.chess.chess.pieces.Rook;
 
 public class ChessMatch {
     private Board board;
 
     public ChessMatch() {
         board = new Board(8, 8);
+        initialSetup();
     }
 
     public ChessPiece[][] getPieces() {
@@ -17,5 +22,12 @@ public class ChessMatch {
             }
         }
         return chessPiece;
+    }
+
+    private void initialSetup() {
+        board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
+        board.placePiece((new King(board, Color.BLACK)), new Position(0, 4));
+        board.placePiece((new King(board, Color.WHITE)), new Position(7, 4));
+
     }
 }
