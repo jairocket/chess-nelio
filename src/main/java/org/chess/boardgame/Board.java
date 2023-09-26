@@ -39,11 +39,25 @@ public class Board {
     }
 
     public void placePiece(Piece piece, Position position) {
-        if(isThereAPiece(position)) {
+        if (isThereAPiece(position)) {
             throw new BoardException("Error: Position " + position + " already has a piece");
         }
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
+    }
+
+    public Piece removePiece(Position position) {
+        if (!positionExists(position)) {
+            throw new BoardException(("Position not on the board"));
+        }
+        if(piece(position) == null){
+            return null;
+        }
+        Piece currentPiece = piece(position);
+        currentPiece.position = null;
+        pieces[position.getRow()][position.getColumn()] = null;
+
+        return currentPiece;
     }
 
     private boolean positionExists(int row, int column) {

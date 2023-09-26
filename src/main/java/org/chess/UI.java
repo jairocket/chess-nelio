@@ -1,7 +1,11 @@
 package org.chess;
 
 import org.chess.chess.ChessPiece;
+import org.chess.chess.ChessPosition;
 import org.chess.chess.enums.Color;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class UI {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -22,6 +26,18 @@ public class UI {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+    public static ChessPosition readChessPosition(Scanner scanner) {
+        try {
+            String input = scanner.nextLine();
+            char column = input.charAt(0);
+
+            int row = Integer.parseInt(input.substring(1));
+            return new ChessPosition(column, row);
+        } catch (RuntimeException runtimeException) {
+            throw new InputMismatchException("Error reading Chess Position. Only values from a1 to h8 are valid.");
+        }
+    }
+
     public static void printBoard(ChessPiece[][] pieces) {
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
@@ -37,7 +53,7 @@ public class UI {
         if (piece == null) {
             System.out.print("-");
         } else {
-            if(piece.getColor() == Color.WHITE) {
+            if (piece.getColor() == Color.WHITE) {
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);
             } else {
                 System.out.print(ANSI_YELLOW + piece + ANSI_RESET);

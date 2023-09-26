@@ -1,7 +1,10 @@
 package org.chess.chess;
 
 import org.chess.boardgame.Board;
+import org.chess.boardgame.Piece;
+import org.chess.boardgame.Position;
 import org.chess.chess.enums.Color;
+import org.chess.chess.exceptions.ChessException;
 import org.chess.chess.pieces.King;
 import org.chess.chess.pieces.Rook;
 
@@ -21,6 +24,29 @@ public class ChessMatch {
             }
         }
         return chessPiece;
+    }
+
+    public ChessPiece performChessMove(ChessPosition originPosition, ChessPosition targetPosition) {
+        Position origin = originPosition.toPosition();
+        Position target = targetPosition.toPosition();
+
+        validateOriginPosition(origin);
+
+        Piece capturedPiece = makeMove(origin, target);
+        return (ChessPiece) capturedPiece;
+    }
+
+    private Piece makeMove(Position origin, Position target) {
+        Piece originPiece = board.removePiece(origin);
+        Piece capturedPiece = board.removePiece(target);
+        board.placePiece(originPiece, target);
+        return capturedPiece;
+    }
+
+    private void validateOriginPosition(Position origin) {
+        if(!board.isThereAPiece(origin)){
+            throw new ChessException("There is no piece on origin position");
+        }
     }
 
     private void placeNewPiece(char column, int row, ChessPiece chessPiece) {
