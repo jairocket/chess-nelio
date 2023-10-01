@@ -4,7 +4,7 @@ import org.chess.boardgame.Board;
 import org.chess.boardgame.Piece;
 import org.chess.chess.enums.Color;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
     private Color color;
 
     public ChessPiece(Board board, Color color) {
