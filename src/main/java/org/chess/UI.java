@@ -1,5 +1,6 @@
 package org.chess;
 
+import org.chess.chess.ChessMatch;
 import org.chess.chess.ChessPiece;
 import org.chess.chess.ChessPosition;
 import org.chess.chess.enums.Color;
@@ -41,6 +42,13 @@ public class UI {
         } catch (RuntimeException runtimeException) {
             throw new InputMismatchException("Error reading Chess Position. Only values from a1 to h8 are valid.");
         }
+    }
+
+    public static void printMatch(ChessMatch chessMatch) {
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
