@@ -7,7 +7,6 @@ import org.chess.chess.enums.Color;
 import org.chess.chess.exceptions.ChessException;
 import org.chess.chess.pieces.*;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -116,7 +115,7 @@ public class ChessMatch {
             throw new IllegalStateException("There are no promotable pieces");
         }
         if(!type.equals("B") && !type.equals("Q") && !type.equals("N") && !type.equals("R")) {
-            throw new InvalidParameterException("Invalid promotion type");
+           return promoted;
         }
         Position promotedPosition = promoted.getChessPosition().toPosition();
         Piece p = board.removePiece(promotedPosition);
