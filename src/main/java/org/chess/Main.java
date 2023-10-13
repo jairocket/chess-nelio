@@ -52,6 +52,6 @@ public class Main {
         UI.clearScreen();
         UI.printMatch(chessMatch, captured);
 
-//        scanner.close();
+        scanner.close();
     }
 }
